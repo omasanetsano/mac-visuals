@@ -1,4 +1,4 @@
-# Masculine Videography Portfolio
+# Videography Portfolio for Mac Visuals
 
 This is a code bundle for Masculine Videography Portfolio. The original project is available at https://www.figma.com/design/3H5Ys8R2GJFbO6JzWZtX6G/Masculine-Videography-Portfolio.
 
