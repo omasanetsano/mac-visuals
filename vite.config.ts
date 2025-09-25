@@ -24,6 +24,7 @@ export default defineConfig({
       'figma:asset/7b33aa6cafdf99181db2cd20f9f3547480e76fcc.png': path.resolve(__dirname, './src/assets/7b33aa6cafdf99181db2cd20f9f3547480e76fcc.png'),
       'figma:asset/7307ff073879b7e11e74dbb7adae056b6f60a7be.png': path.resolve(__dirname, './src/assets/7307ff073879b7e11e74dbb7adae056b6f60a7be.png'),
       'figma:asset/5cd2c6568861113efef088165ee4352afe284d03.png': path.resolve(__dirname, './src/assets/5cd2c6568861113efef088165ee4352afe284d03.png'),
+      'figma:asset/fashion.jpg': path.resolve(__dirname, './src/assets/fashion.jpg'),
       'embla-carousel-react@8.6.0': 'embla-carousel-react',
       'cmdk@1.1.1': 'cmdk',
       'class-variance-authority@0.7.1': 'class-variance-authority',

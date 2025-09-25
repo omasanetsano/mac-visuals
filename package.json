@@ -59,6 +59,8 @@
             "build": "vite build",
             "preview": "vite preview",
             "optimize-images": "powershell -ExecutionPolicy Bypass -File optimize_images.ps1",
+            "optimize-videos": "powershell -ExecutionPolicy Bypass -File optimize_videos.ps1",
+            "optimize-videos-advanced": "powershell -ExecutionPolicy Bypass -File optimize_videos_advanced.ps1",
             "analyze": "vite build && npx vite-bundle-analyzer dist/stats.json",
             "perf-test": "node performance-test.js"
       }

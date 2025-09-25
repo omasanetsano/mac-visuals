@@ -26,12 +26,19 @@ This portfolio website has been optimized for performance with the following imp
 ### Asset Optimizations
 - Added curved edges to video frames in Visual Stories section
 - Implemented hover-based glitch effects for better performance
-- Optimized video loading with autoplay, loop, and muted attributes
+- Optimized video loading with viewport-based loading and metadata preloading
 
 ### Code Optimizations
 - Reduced unnecessary re-renders
 - Implemented efficient component structures
 - Minimized bundle size through tree-shaking
+- Added Intersection Observer for video lazy loading
+
+### Video Optimization
+- Added advanced video optimization scripts (`optimize_videos_advanced.ps1`) to reduce video file sizes for web streaming
+- Implemented lazy loading for videos (only loads when in viewport)
+- Set videos to preload only metadata instead of entire files
+- Added optimized video encoding with H.264 codec and appropriate bitrates
 
 ### Testing
 - Added performance testing script (performance-test.js) to monitor load times and resource usage

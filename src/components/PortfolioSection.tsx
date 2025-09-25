@@ -1,5 +1,5 @@
 import image_c2b893049bd9edd7b3e55b9c49368f098700d682 from 'figma:asset/c2b893049bd9edd7b3e55b9c49368f098700d682.png';
-import fashion from '../assets/fashion.jpg';
+import fashion from 'figma:asset/fashion.jpg';
 import image_7307ff073879b7e11e74dbb7adae056b6f60a7be from 'figma:asset/7307ff073879b7e11e74dbb7adae056b6f60a7be.png';
 import image_d13d14c728c7291adb45063b7fbcbfc655c566ac from 'figma:asset/d13d14c728c7291adb45063b7fbcbfc655c566ac.png';
 import image_c0b905c0305a1e9d34d45b66632685257571ac6e from 'figma:asset/c0b905c0305a1e9d34d45b66632685257571ac6e.png';
