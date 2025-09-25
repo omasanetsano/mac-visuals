@@ -1,7 +1,9 @@
+// @ts-ignore
 import image_5cd2c6568861113efef088165ee4352afe284d03 from '../assets/5cd2c6568861113efef088165ee4352afe284d03.png';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
+import { isHighPerformanceDevice } from '../utils/performanceUtils';
 
 export function HeroSection() {
   const navLinks = [
@@ -15,7 +17,7 @@ export function HeroSection() {
     <section id="home" className="min-h-screen bg-gradient-to-br from-gray-900 to-black pt-4 relative overflow-hidden">
       {/* Animated background elements - similar to About page */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(10)].map((_, i) => (
+        {[...Array(isHighPerformanceDevice() ? 10 : 5)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-2 h-2 bg-white rounded-full opacity-20"
@@ -23,17 +25,17 @@ export function HeroSection() {
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
             }}
-            animate={{
+            animate={isHighPerformanceDevice() ? {
               y: [0, Math.random() * 100 - 50],
               x: [0, Math.random() * 100 - 50],
               opacity: [0.2, 0.5, 0.2],
-            }}
-            transition={{
+            } : { opacity: 0.2 }}
+            transition={isHighPerformanceDevice() ? {
               duration: Math.random() * 10 + 5,
               repeat: Infinity,
               ease: "easeInOut",
               delay: Math.random() * 2,
-            }}
+            } : {}}
           />
         ))}
       </div>
@@ -81,7 +83,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700 shadow-2xl"
+            className={`bg-gray-800/50 ${isHighPerformanceDevice() ? 'backdrop-blur-sm' : ''} rounded-2xl p-8 border border-gray-700 shadow-2xl`}
           >
             <div className="space-y-6 sm:space-y-8 lg:space-y-12">
               <div className="space-y-4">
@@ -189,7 +191,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
-            className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700 shadow-2xl flex items-center justify-center"
+            className={`bg-gray-800/50 ${isHighPerformanceDevice() ? 'backdrop-blur-sm' : ''} rounded-2xl p-8 border border-gray-700 shadow-2xl flex items-center justify-center`}
           >
             <motion.div 
               className="relative w-64 h-80 sm:w-80 sm:h-96 lg:w-[400px] lg:h-[500px]"
@@ -200,7 +202,7 @@ export function HeroSection() {
             >
               {/* Simplified torn paper border effect */}
               <motion.div 
-                className="absolute inset-0 bg-gray-600 transform rotate-1 shadow-xl"
+                className="absolute inset-0 transform rotate-1 shadow-xl"
                 style={{
                   clipPath: `polygon(
                     8% 2%, 92% 0%, 98% 8%, 100% 15%, 97% 25%, 100% 35%, 95% 45%, 98% 55%, 

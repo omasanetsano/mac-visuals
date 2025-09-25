@@ -21,7 +21,6 @@ export default defineConfig({
       'figma:asset/c2b893049bd9edd7b3e55b9c49368f098700d682.png': path.resolve(__dirname, './src/assets/c2b893049bd9edd7b3e55b9c49368f098700d682.png'),
       'figma:asset/c0b905c0305a1e9d34d45b66632685257571ac6e.png': path.resolve(__dirname, './src/assets/c0b905c0305a1e9d34d45b66632685257571ac6e.png'),
       'figma:asset/b25725c2d9fe3e83e8e8b5a7eceb73fde424a4a3.png': path.resolve(__dirname, './src/assets/b25725c2d9fe3e83e8e8b5a7eceb73fde424a4a3.png'),
-      'figma:asset/8119fe6589a7b09516ed134f085e44d25eec7f7b.png': path.resolve(__dirname, './src/assets/8119fe6589a7b09516ed134f085e44d25eec7f7b.png'),
       'figma:asset/7b33aa6cafdf99181db2cd20f9f3547480e76fcc.png': path.resolve(__dirname, './src/assets/7b33aa6cafdf99181db2cd20f9f3547480e76fcc.png'),
       'figma:asset/7307ff073879b7e11e74dbb7adae056b6f60a7be.png': path.resolve(__dirname, './src/assets/7307ff073879b7e11e74dbb7adae056b6f60a7be.png'),
       'figma:asset/5cd2c6568861113efef088165ee4352afe284d03.png': path.resolve(__dirname, './src/assets/5cd2c6568861113efef088165ee4352afe284d03.png'),
@@ -77,12 +76,16 @@ export default defineConfig({
         drop_console: true,
         drop_debugger: true,
         pure_funcs: ['console.log', 'console.info', 'console.debug'],
+        // Additional compression optimizations
+        passes: 2,
       },
       mangle: true,
       format: {
         comments: false,
       },
     },
+    // Additional build optimizations
+    assetsInlineLimit: 4096, // Inline assets smaller than 4kb
   },
   server: {
     port: 3000,

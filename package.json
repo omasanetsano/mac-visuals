@@ -56,6 +56,10 @@
       },
       "scripts": {
             "dev": "vite",
-            "build": "vite build"
+            "build": "vite build",
+            "preview": "vite preview",
+            "optimize-images": "powershell -ExecutionPolicy Bypass -File optimize_images.ps1",
+            "analyze": "vite build && npx vite-bundle-analyzer dist/stats.json",
+            "perf-test": "node performance-test.js"
       }
 }

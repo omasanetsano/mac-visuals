@@ -1,5 +1,5 @@
 import image_c2b893049bd9edd7b3e55b9c49368f098700d682 from 'figma:asset/c2b893049bd9edd7b3e55b9c49368f098700d682.png';
-import image_8119fe6589a7b09516ed134f085e44d25eec7f7b from 'figma:asset/8119fe6589a7b09516ed134f085e44d25eec7f7b.png';
+import fashion from '../assets/fashion.jpg';
 import image_7307ff073879b7e11e74dbb7adae056b6f60a7be from 'figma:asset/7307ff073879b7e11e74dbb7adae056b6f60a7be.png';
 import image_d13d14c728c7291adb45063b7fbcbfc655c566ac from 'figma:asset/d13d14c728c7291adb45063b7fbcbfc655c566ac.png';
 import image_c0b905c0305a1e9d34d45b66632685257571ac6e from 'figma:asset/c0b905c0305a1e9d34d45b66632685257571ac6e.png';
@@ -23,7 +23,7 @@ export function PortfolioSection() {
       image: image_7307ff073879b7e11e74dbb7adae056b6f60a7be
     },
     {
-      image: image_8119fe6589a7b09516ed134f085e44d25eec7f7b
+      image: fashion
     },
     {
       image: image_c2b893049bd9edd7b3e55b9c49368f098700d682
@@ -31,7 +31,7 @@ export function PortfolioSection() {
   ];
 
   return (
-    <section id="portfolio" className="min-h-screen bg-zinc-900 py-20 relative overflow-hidden">
+    <section id="portfolio" className="min-h-screen bg-gradient-to-br from-gray-900 to-black py-20 relative overflow-hidden">
       {/* Mega animated background - optimized for performance */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(25)].map((_, i) => (

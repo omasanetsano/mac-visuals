@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import { isHighPerformanceDevice } from '../utils/performanceUtils';
 
 export function FilmmakingPage() {
   const filmProjects = [
@@ -30,19 +31,18 @@ export function FilmmakingPage() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, rotateX: -90, perspective: 1000 }}
-      animate={{ opacity: 1, rotateX: 0, perspective: 1000 }}
-      exit={{ opacity: 0, rotateX: 90, perspective: 1000 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
       transition={{ 
-        duration: 1.6, 
-        ease: [0.175, 0.885, 0.32, 1.275],
-        rotateX: { duration: 1.8, ease: "backOut" }
+        duration: 0.7, 
+        ease: [0.23, 1, 0.32, 1]
       }}
-      className="min-h-screen pt-20 bg-zinc-900"
+      className="min-h-screen pt-20 bg-zinc-900 relative overflow-hidden"
     >
-      {/* Floating particles background */}
+      {/* Floating particles background - optimized for performance */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(20)].map((_, i) => (
+        {[...Array(isHighPerformanceDevice() ? 10 : 5)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-2 h-2 bg-orange-400 rounded-full opacity-20"
@@ -50,18 +50,18 @@ export function FilmmakingPage() {
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
             }}
-            animate={{
+            animate={isHighPerformanceDevice() ? {
               y: [0, -100, 0],
               x: [0, Math.random() * 100 - 50, 0],
               scale: [1, 1.5, 1],
               opacity: [0.2, 0.8, 0.2],
-            }}
-            transition={{
+            } : { opacity: 0.2 }}
+            transition={isHighPerformanceDevice() ? {
               duration: Math.random() * 3 + 2,
               repeat: Infinity,
               ease: "easeInOut",
               delay: Math.random() * 2,
-            }}
+            } : {}}
           />
         ))}
       </div>

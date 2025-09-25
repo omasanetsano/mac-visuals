@@ -25,7 +25,7 @@ export function ContactSection() {
   ];
 
   return (
-    <section id="contact" className="min-h-screen bg-black py-20 relative overflow-hidden">
+    <section id="contact" className="min-h-screen bg-gradient-to-br from-gray-900 to-black py-20 relative overflow-hidden">
       {/* Electric animated background - optimized for performance */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(20)].map((_, i) => (

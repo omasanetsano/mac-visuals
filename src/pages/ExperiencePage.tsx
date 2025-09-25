@@ -40,7 +40,7 @@ export function ExperiencePage() {
           className="absolute top-0 left-0 w-full h-full"
           animate={{
             background: [
-              "radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 50%)",
+              "radial-gradient(circle at 20% 30%, rgba(250, 246, 246, 0.1) 0%, transparent 50%)",
               "radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 50%)",
               "radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%)"
             ]

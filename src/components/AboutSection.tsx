@@ -1,7 +1,9 @@
 import { motion } from 'motion/react';
 import { User, Award, Camera, MapPin, Calendar, Star, Code } from 'lucide-react';
 // Import the behind-the-scenes image
+// @ts-ignore
 import behindTheScenesImage from '../assets/b25725c2d9fe3e83e8e8b5a7eceb73fde424a4a3.png';
+import { isHighPerformanceDevice } from '../utils/performanceUtils';
 
 export function AboutSection() {
   const personalInfo = {
@@ -23,7 +25,7 @@ export function AboutSection() {
     <section id="about" className="min-h-screen bg-gradient-to-br from-gray-900 to-black py-20 relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(10)].map((_, i) => (
+        {[...Array(isHighPerformanceDevice() ? 10 : 5)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-2 h-2 bg-white rounded-full opacity-20"
@@ -31,17 +33,17 @@ export function AboutSection() {
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
             }}
-            animate={{
+            animate={isHighPerformanceDevice() ? {
               y: [0, Math.random() * 100 - 50],
               x: [0, Math.random() * 100 - 50],
               opacity: [0.2, 0.5, 0.2],
-            }}
-            transition={{
+            } : { opacity: 0.2 }}
+            transition={isHighPerformanceDevice() ? {
               duration: Math.random() * 10 + 5,
               repeat: Infinity,
               ease: "easeInOut",
               delay: Math.random() * 2,
-            }}
+            } : {}}
           />
         ))}
       </div>
@@ -76,7 +78,7 @@ export function AboutSection() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700 shadow-2xl"
+            className={`bg-gray-800/50 ${isHighPerformanceDevice() ? 'backdrop-blur-sm' : ''} rounded-2xl p-8 border border-gray-700 shadow-2xl`}
           >
             <div className="flex items-center mb-8">
               <div className="bg-white p-3 rounded-full mr-4">
@@ -88,7 +90,7 @@ export function AboutSection() {
             <div className="space-y-6">
               <div>
                 <h4 className="text-3xl font-bold text-white mb-2">{personalInfo.name}</h4>
-                <p className="text-blue-400 text-lg mb-4">{personalInfo.title}</p>
+                <p className="text-white text-lg mb-4">{personalInfo.title}</p>
                 <div className="flex items-center text-gray-300 mb-2">
                   <MapPin size={18} className="mr-2" />
                   <span>{personalInfo.location}</span>
@@ -126,7 +128,7 @@ export function AboutSection() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
-            className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700 shadow-2xl flex items-center justify-center"
+            className={`bg-gray-800/50 ${isHighPerformanceDevice() ? 'backdrop-blur-sm' : ''} rounded-2xl p-8 border border-gray-700 shadow-2xl flex items-center justify-center`}
           >
             <div className="text-center">
               <h3 className="text-2xl font-bold text-white mb-8">Behind the Scenes</h3>
@@ -138,6 +140,7 @@ export function AboutSection() {
                     src={behindTheScenesImage} 
                     alt="Behind the scenes" 
                     className="w-full h-64 object-cover"
+                    loading="lazy"
                   />
                   <div className="text-center mt-3 text-sm font-medium text-gray-800">
                     Professional video production
@@ -160,7 +163,7 @@ export function AboutSection() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7, duration: 0.8 }}
-            className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700 shadow-2xl"
+            className={`bg-gray-800/50 ${isHighPerformanceDevice() ? 'backdrop-blur-sm' : ''} rounded-2xl p-8 border border-gray-700 shadow-2xl`}
           >
             <div className="flex items-center mb-8 justify-center">
               <div className="bg-white p-3 rounded-full mr-4">

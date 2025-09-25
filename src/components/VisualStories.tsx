@@ -46,63 +46,110 @@ const VisualStories = () => {
   }, [currentIndex, fullText, isDeleting]);
 
   return (
-    <section className="bg-black text-white py-16">
-      <div className="container mx-auto px-4">
-        <motion.h1 
-          className="text-4xl md:text-5xl font-bold mb-12 text-center flex items-center justify-center"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <span>{displayText}</span>
-          <span className="ml-4 text-4xl md:text-5xl">🎥</span>
-          <span className="ml-1 inline-block w-2 h-12 bg-white animate-pulse"></span>
-        </motion.h1>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 md:px-8 mt-16">
-        {videos.map((videoSrc, index) => (
+    <motion.section className="bg-black text-white py-16 min-h-screen relative overflow-hidden">
+      {/* Keep the animated background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(20)].map((_, i) => (
           <motion.div
-            key={index}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ 
-              duration: 0.5,
-              delay: 3 + index * 0.1, // Delay videos until after typing
+            key={i}
+            className="absolute w-1 h-1 bg-white rounded-full opacity-20"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
             }}
-            className="relative group"
-          >
-            <div className="relative overflow-hidden rounded-2xl">
-              <video
-                src={videoSrc}
-                autoPlay
-                loop
-                muted
-                playsInline
-                preload="auto"
-                controls={false}
-                className="w-full h-auto object-cover"
-                style={{ 
-                  maxWidth: '100%', 
-                  height: 'auto',
-                  willChange: 'transform'
-                }}
-                onLoadedData={(e) => {
-                  // Ensure optimal playback
-                  const video = e.target as HTMLVideoElement;
-                  video.playbackRate = 1.0;
-                }}
-              />
-              {/* Glitch effect overlay - only visible on hover */}
-              <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 pointer-events-none rounded-2xl transition-opacity duration-300"></div>
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none rounded-2xl transition-opacity duration-300">
-                <div className="absolute inset-0 bg-red-500 mix-blend-color opacity-30 animate-pulse"></div>
-                <div className="absolute inset-0 bg-blue-500 mix-blend-color opacity-20 animate-pulse" style={{ animationDelay: '0.2s' }}></div>
-              </div>
-            </div>
-          </motion.div>
+            animate={{
+              scale: [1, 3, 1],
+              opacity: [0.2, 0.8, 0.2],
+              x: [0, Math.random() * 100 - 50],
+              y: [0, Math.random() * 100 - 50],
+            }}
+            transition={{
+              duration: Math.random() * 6 + 3,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: Math.random() * 4,
+            }}
+          />
         ))}
       </div>
-    </section>
+      
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ 
+          duration: 0.7, 
+          ease: [0.23, 1, 0.32, 1]
+        }}
+        className="min-h-screen relative z-10"
+      >
+        <motion.div
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ 
+            delay: 0.3, 
+            duration: 0.6, 
+            ease: "easeOut"
+          }}
+        >
+          <div className="container mx-auto px-4">
+            <motion.h1 
+              className="text-4xl md:text-5xl font-bold mb-12 text-center flex items-center justify-center"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <span>{displayText}</span>
+              <span className="ml-4 text-4xl md:text-5xl">🎥</span>
+              <span className="ml-1 inline-block w-2 h-12 bg-white animate-pulse"></span>
+            </motion.h1>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 md:px-8 mt-16">
+            {videos.map((videoSrc, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ 
+                  duration: 0.5,
+                  delay: 3 + index * 0.1, // Delay videos until after typing
+                }}
+                className="relative group"
+              >
+                <div className="relative overflow-hidden rounded-2xl">
+                  <video
+                    src={videoSrc}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="auto"
+                    controls={false}
+                    className="w-full h-auto object-cover"
+                    style={{ 
+                      maxWidth: '100%', 
+                      height: 'auto',
+                      willChange: 'transform'
+                    }}
+                    onLoadedData={(e) => {
+                      // Ensure optimal playback
+                      const video = e.target as HTMLVideoElement;
+                      video.playbackRate = 1.0;
+                    }}
+                  />
+                  {/* Glitch effect overlay - only visible on hover */}
+                  <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 pointer-events-none rounded-2xl transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none rounded-2xl transition-opacity duration-300">
+                    <div className="absolute inset-0 bg-red-500 mix-blend-color opacity-30 animate-pulse"></div>
+                    <div className="absolute inset-0 bg-blue-500 mix-blend-color opacity-20 animate-pulse" style={{ animationDelay: '0.2s' }}></div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </motion.div>
+    </motion.section>
   );
 };
 

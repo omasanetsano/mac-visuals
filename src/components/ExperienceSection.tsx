@@ -1,23 +1,24 @@
 import { motion } from 'motion/react';
 import { Star, Code, Camera, Award, TrendingUp, Lightbulb } from 'lucide-react';
+import { isHighPerformanceDevice } from '../utils/performanceUtils';
 
 export function ExperienceSection() {
   const technicalSkills = [
-    { name: "Premiere Pro", level: 95, color: "bg-blue-500" },
-    { name: "After Effects", level: 90, color: "bg-purple-500" },
-    { name: "Lightroom", level: 92, color: "bg-yellow-500" },
-    { name: "Photoshop", level: 88, color: "bg-blue-400" },
-    { name: "Final Cut Pro", level: 94, color: "bg-red-500" },
-    { name: "DaVinci Resolve", level: 85, color: "bg-green-500" }
+    { name: "Premiere Pro", level: 95, color: "bg-white" },
+    { name: "After Effects", level: 90, color: "bg-white" },
+    { name: "Lightroom", level: 92, color: "bg-white" },
+    { name: "Photoshop", level: 88, color: "bg-white" },
+    { name: "Final Cut Pro", level: 94, color: "bg-white" },
+    { name: "DaVinci Resolve", level: 85, color: "bg-white" }
   ];
 
   const personalSkills = [
-    { name: "Creativity", level: 98, color: "bg-pink-500" },
-    { name: "Attention to Detail", level: 95, color: "bg-indigo-500" },
-    { name: "Storytelling", level: 92, color: "bg-teal-500" },
-    { name: "Collaboration", level: 90, color: "bg-orange-500" },
-    { name: "Adaptability", level: 88, color: "bg-cyan-500" },
-    { name: "Time Management", level: 85, color: "bg-rose-500" }
+    { name: "Creativity", level: 98, color: "bg-white" },
+    { name: "Attention to Detail", level: 95, color: "bg-white" },
+    { name: "Storytelling", level: 92, color: "bg-white" },
+    { name: "Collaboration", level: 90, color: "bg-white" },
+    { name: "Adaptability", level: 88, color: "bg-white" },
+    { name: "Time Management", level: 85, color: "bg-white" }
   ];
 
   const experiences = [
@@ -47,7 +48,7 @@ export function ExperienceSection() {
     <section id="experience" className="min-h-screen bg-gradient-to-br from-gray-900 to-black py-20 relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(10)].map((_, i) => (
+        {[...Array(isHighPerformanceDevice() ? 10 : 5)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-2 h-2 bg-white rounded-full opacity-20"
@@ -55,17 +56,17 @@ export function ExperienceSection() {
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
             }}
-            animate={{
+            animate={isHighPerformanceDevice() ? {
               y: [0, Math.random() * 100 - 50],
               x: [0, Math.random() * 100 - 50],
               opacity: [0.2, 0.5, 0.2],
-            }}
-            transition={{
+            } : { opacity: 0.2 }}
+            transition={isHighPerformanceDevice() ? {
               duration: Math.random() * 10 + 5,
               repeat: Infinity,
               ease: "easeInOut",
               delay: Math.random() * 2,
-            }}
+            } : {}}
           />
         ))}
       </div>
@@ -100,7 +101,7 @@ export function ExperienceSection() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700 shadow-2xl"
+            className={`bg-gray-800/50 ${isHighPerformanceDevice() ? 'backdrop-blur-sm' : ''} rounded-2xl p-8 border border-gray-700 shadow-2xl`}
           >
             <div className="flex items-center mb-8">
               <div className="bg-white p-3 rounded-full mr-4">
@@ -139,7 +140,7 @@ export function ExperienceSection() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
-            className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700 shadow-2xl"
+            className={`bg-gray-800/50 ${isHighPerformanceDevice() ? 'backdrop-blur-sm' : ''} rounded-2xl p-8 border border-gray-700 shadow-2xl`}
           >
             <div className="flex items-center mb-8">
               <div className="bg-white p-3 rounded-full mr-4">
@@ -181,7 +182,7 @@ export function ExperienceSection() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7, duration: 0.8 }}
-            className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700 shadow-2xl"
+            className={`bg-gray-800/50 ${isHighPerformanceDevice() ? 'backdrop-blur-sm' : ''} rounded-2xl p-8 border border-gray-700 shadow-2xl`}
           >
             <div className="flex items-center mb-8">
               <div className="bg-white p-3 rounded-full mr-4">
@@ -221,7 +222,7 @@ export function ExperienceSection() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: 0.8 }}
-            className="bg-gradient-to-br from-blue-900/50 to-purple-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700 shadow-2xl text-center"
+            className={`bg-gradient-to-br from-blue-900/50 to-purple-900/50 ${isHighPerformanceDevice() ? 'backdrop-blur-sm' : ''} rounded-2xl p-8 border border-gray-700 shadow-2xl text-center`}
           >
             <div className="flex justify-center mb-6">
               <div className="bg-white p-4 rounded-full">

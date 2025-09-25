@@ -2,6 +2,9 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { motion, AnimatePresence } from 'motion/react';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
+import React, { Suspense } from 'react';
+
+// Import pages directly to avoid TypeScript issues
 import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
 import { ExperiencePage } from './pages/ExperiencePage';
