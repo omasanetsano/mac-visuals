@@ -17,7 +17,7 @@ export default function App() {
           Skip to main content
         </a>
         <Header />
-        <main id="main-content" className="flex-grow pt-20 w-full" tabIndex={-1}>
+        <main id="main-content" className="flex-grow pt-16 w-full" tabIndex={-1}>  // Reduced padding from pt-20 to pt-16
           <AnimatePresence mode="wait">
             <Routes>
               <Route path="/" element={<HomePage />} />

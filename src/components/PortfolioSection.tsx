@@ -27,13 +27,7 @@ export function PortfolioSection() {
     },
     {
       image: image_c2b893049bd9edd7b3e55b9c49368f098700d682
-    },
-    {
-      image: "src/assets/redd.jpg"    },
-    {
-      image: "src/assets/green.jpg"    },
-    {
-      image: "src/assets/black.jpg"    }
+    }
   ];
 
   return (

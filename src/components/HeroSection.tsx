@@ -5,78 +5,55 @@ import { Link } from 'react-router-dom';
 
 export function HeroSection() {
   const navLinks = [
-    { to: '/about', label: 'About me' },
-    { to: '/experience', label: 'Education x Experience' },
-    { to: '/portfolio', label: 'Photography' },
+    { to: '/about', label: 'About Me' },
+    { to: '/experience', label: 'Experience' },
+    { to: '/portfolio', label: 'Portraits' },
     { to: '/content', label: 'Visual Stories' }
   ];
 
   return (
-    <section id="home" className="min-h-screen bg-black pt-20 relative overflow-hidden">
-      {/* Reduced animated background particles for better performance */}
+    <section id="home" className="min-h-screen bg-gradient-to-br from-gray-900 to-black pt-4 relative overflow-hidden">
+      {/* Animated background elements - similar to About page */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(3)].map((_, i) => (
+        {[...Array(10)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 bg-white rounded-full opacity-30"
+            className="absolute w-2 h-2 bg-white rounded-full opacity-20"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
             }}
             animate={{
-              scale: [1, 1.5, 1],
-              opacity: [0.3, 0.6, 0.3],
-            }}
-            transition={{
-              duration: Math.random() * 2 + 1,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: Math.random() * 0.5,
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Simplified electric animated background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(5)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-white rounded-full opacity-20"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              scale: [1, 2, 1],
+              y: [0, Math.random() * 100 - 50],
+              x: [0, Math.random() * 100 - 50],
               opacity: [0.2, 0.5, 0.2],
             }}
             transition={{
-              duration: Math.random() * 3 + 2,
+              duration: Math.random() * 10 + 5,
               repeat: Infinity,
               ease: "easeInOut",
-              delay: Math.random() * 1,
+              delay: Math.random() * 2,
             }}
           />
         ))}
-        
-        {/* Simplified electric lightning bolts */}
-        <motion.div
-          className="absolute top-0 left-0 w-full h-full"
-          animate={{
-            background: [
-              "radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.05) 0%, transparent 50%)",
-              "radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.05) 0%, transparent 50%)",
-              "radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 50%)"
-            ]
-          }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        />
       </div>
+
+      {/* Electric lightning bolts */}
+      <motion.div
+        className="absolute top-0 left-0 w-full h-full"
+        animate={{
+          background: [
+            "radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 50%)",
+            "radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 50%)",
+            "radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%)"
+          ]
+        }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+      />
 
       {/* Welcome text at top */}
       <motion.div 
-        className="text-center pt-8"
+        className="text-center pt-2"
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.5 }}
@@ -96,116 +73,123 @@ export function HeroSection() {
         </motion.p>
       </motion.div>
       
-      <div className="container mx-auto px-4 sm:px-6 py-16 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 py-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center min-h-[80vh]">
           
-          {/* Left side - Text content and navigation */}
-          <div className="space-y-6 sm:space-y-8 lg:space-y-12">
-            <div className="space-y-4">
-              <motion.h1 
-                className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-300 leading-tight uppercase"
-                initial={{ x: -100, opacity: 0 }}
-                animate={{ 
-                  x: 0, 
-                  opacity: 1,
-                  textShadow: [
-                    "0 0 10px rgba(255, 255, 255, 0.5)",
-                    "0 0 20px rgba(255, 255, 255, 0.8)",
-                    "0 0 10px rgba(255, 255, 255, 0.5)"
-                  ]
-                }}
-                transition={{ delay: 0.5, duration: 0.8 }}
-                whileHover={{ 
-                  scale: 1.05, 
-                  textShadow: "0 0 20px rgba(255, 255, 255, 0.8)",
-                }}
-              >
-               YOUR
-              </motion.h1>
-              <motion.h1 
-                className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-300 leading-tight uppercase"
-                initial={{ x: 100, opacity: 0 }}
-                animate={{ 
-                  x: 0, 
-                  opacity: 1,
-                  textShadow: [
-                    "0 0 10px rgba(255, 255, 255, 0.5)",
-                    "0 0 20px rgba(255, 255, 255, 0.8)",
-                    "0 0 10px rgba(255, 255, 255, 0.5)"
-                  ]
-                }}
-                transition={{ delay: 0.7, duration: 0.8 }}
-                whileHover={{ 
-                  scale: 1.05, 
-                  textShadow: "0 0 20px rgba(255, 255, 255, 0.8)",
-                }}
-              >
-                FAVOURITE
-              </motion.h1>
-              <motion.h1 
-                className="text-5xl sm:text-6xl lg:text-7xl font-bold italic text-white transform -rotate-2 font-handwriting"
-                initial={{ y: 50, opacity: 0 }}
-                animate={{ 
-                  y: 0, 
-                  opacity: 1,
-                  textShadow: [
-                    "0 0 10px rgba(255, 255, 255, 0.6)",
-                    "0 0 20px rgba(255, 255, 255, 0.9)",
-                    "0 0 10px rgba(255, 255, 255, 0.6)"
-                  ],
-                }}
-                transition={{ delay: 0.9, duration: 0.8 }}
-                whileHover={{ 
-                  scale: 1.1, 
-                  textShadow: "0 0 25px rgba(255, 255, 255, 1)"
-                }}
-              >
-                VIDEOGRAPHER
-              </motion.h1>
-            </div>
-            
-            {/* Navigation Links */}
-            <motion.div 
-              className="space-y-2 mt-8 sm:mt-12"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.2, duration: 0.5 }}
-            >
-              {navLinks.map((link, index) => (
-                <motion.div
-                  key={link.to}
-                  initial={{ x: -50, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ 
-                    delay: 1.3 + index * 0.1, 
-                    duration: 0.4,
+          {/* Left side - Text content and navigation in a card */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+            className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700 shadow-2xl"
+          >
+            <div className="space-y-6 sm:space-y-8 lg:space-y-12">
+              <div className="space-y-4">
+                <motion.h1 
+                  className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-300 leading-tight uppercase"
+                  initial={{ x: -100, opacity: 0 }}
+                  animate={{ 
+                    x: 0, 
+                    opacity: 1,
+                    textShadow: [
+                      "0 0 10px rgba(255, 255, 255, 0.5)",
+                      "0 0 20px rgba(255, 255, 255, 0.8)",
+                      "0 0 10px rgba(255, 255, 255, 0.5)"
+                    ]
+                  }}
+                  transition={{ delay: 0.5, duration: 0.8 }}
+                  whileHover={{ 
+                    scale: 1.05, 
+                    textShadow: "0 0 20px rgba(255, 255, 255, 0.8)",
                   }}
                 >
-                  <Link 
-                    to={link.to}
-                    className="block text-gray-300 hover:text-white transition-colors underline text-lg sm:text-xl group"
+                YOUR
+                </motion.h1>
+                <motion.h1 
+                  className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-300 leading-tight uppercase"
+                  initial={{ x: 100, opacity: 0 }}
+                  animate={{ 
+                    x: 0, 
+                    opacity: 1,
+                    textShadow: [
+                      "0 0 10px rgba(255, 255, 255, 0.5)",
+                      "0 0 20px rgba(255, 255, 255, 0.8)",
+                      "0 0 10px rgba(255, 255, 255, 0.5)"
+                    ]
+                  }}
+                  transition={{ delay: 0.7, duration: 0.8 }}
+                  whileHover={{ 
+                    scale: 1.05, 
+                    textShadow: "0 0 20px rgba(255, 255, 255, 0.8)",
+                  }}
+                >
+                  FAVOURITE
+                </motion.h1>
+                <motion.h1 
+                  className="text-5xl sm:text-6xl lg:text-7xl font-bold italic text-white transform -rotate-2 font-handwriting"
+                  initial={{ y: 50, opacity: 0 }}
+                  animate={{ 
+                    y: 0, 
+                    opacity: 1,
+                    textShadow: [
+                      "0 0 10px rgba(255, 255, 255, 0.6)",
+                      "0 0 20px rgba(255, 255, 255, 0.9)",
+                      "0 0 10px rgba(255, 255, 255, 0.6)"
+                    ],
+                  }}
+                  transition={{ delay: 0.9, duration: 0.8 }}
+                  whileHover={{ 
+                    scale: 1.1, 
+                    textShadow: "0 0 25px rgba(255, 255, 255, 1)"
+                  }}
+                >
+                  VIDEOGRAPHER
+                </motion.h1>
+              </div>
+              
+              {/* Navigation Links */}
+              <motion.div 
+                className="space-y-2 mt-8 sm:mt-12"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.2, duration: 0.5 }}
+              >
+                {navLinks.map((link, index) => (
+                  <motion.div
+                    key={link.to}
+                    initial={{ x: -50, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ 
+                      delay: 1.3 + index * 0.1, 
+                      duration: 0.4,
+                    }}
                   >
-                    <motion.span
-                      whileHover={{ 
-                        x: 10, 
-                        textShadow: "0 0 8px rgba(255, 255, 255, 0.8)",
-                      }}
-                      transition={{ duration: 0.2 }}
+                    <Link 
+                      to={link.to}
+                      className="block text-gray-300 hover:text-white transition-colors underline text-lg sm:text-xl group"
                     >
-                      {link.label}
-                    </motion.span>
-                  </Link>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
+                      <motion.span
+                        whileHover={{ 
+                          x: 10, 
+                          textShadow: "0 0 8px rgba(255, 255, 255, 0.8)",
+                        }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        {link.label}
+                      </motion.span>
+                    </Link>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </div>
+          </motion.div>
 
-          {/* Right side - Profile image with torn paper effect */}
+          {/* Right side - Profile image with torn paper effect in a card */}
           <motion.div 
-            className="relative flex justify-center lg:justify-end"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8, duration: 0.8 }}
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+            className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700 shadow-2xl flex items-center justify-center"
           >
             <motion.div 
               className="relative w-64 h-80 sm:w-80 sm:h-96 lg:w-[400px] lg:h-[500px]"
