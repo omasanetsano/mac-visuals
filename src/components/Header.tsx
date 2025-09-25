@@ -40,17 +40,17 @@ export function Header() {
             className="text-white font-bold text-lg flex items-center space-x-2"
             onClick={handleLinkClick}
           >
-            <span>MALCOLM (MAC)</span>
-            <span>🎥</span>
+            <span className="text-sm sm:text-base">MALCOLM (MAC)</span>
+            <span className="text-sm">🎥</span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
+          <div className="hidden md:flex items-center space-x-4 lg:space-x-6">
             {navItems.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
-                className={`relative transition-colors duration-300 text-sm lg:text-base ${
+                className={`relative transition-colors duration-300 text-xs sm:text-sm lg:text-base ${
                   isActive(item.path)
                     ? 'text-white'
                     : 'text-gray-300 hover:text-white'
@@ -70,11 +70,11 @@ export function Header() {
 
           {/* Hamburger */}
           <button
-            className="md:hidden text-white"
+            className="md:hidden text-white p-1"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
           >
-            {isOpen ? <X size={28} /> : <Menu size={28} />}
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
@@ -82,11 +82,11 @@ export function Header() {
         <AnimatePresence>
           {isOpen && (
             <motion.div
-              className="md:hidden fixed inset-0 bg-black flex flex-col items-center justify-center space-y-8 text-white z-40"
+              className="md:hidden fixed inset-0 bg-black flex flex-col items-center justify-center space-y-6 text-white z-40"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.2 }}
               onClick={closeMenu}
             >
               {navItems.map((item, i) => (
@@ -95,13 +95,13 @@ export function Header() {
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   exit={{ y: 20, opacity: 0 }}
-                  transition={{ delay: i * 0.1 }}
+                  transition={{ delay: i * 0.05 }}
                   onClick={(e) => e.stopPropagation()} // Prevent closing when clicking on menu items
                 >
                   <Link
                     to={item.path}
                     onClick={handleLinkClick}
-                    className={`text-2xl font-medium transition-colors ${
+                    className={`text-lg sm:text-xl font-medium transition-colors ${
                       isActive(item.path)
                         ? 'text-white'
                         : 'text-gray-300 hover:text-gray-400'

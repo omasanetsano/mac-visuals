@@ -5,9 +5,9 @@ import { motion } from 'motion/react';
 export function AboutSection() {
   return (
     <section id="about" className="min-h-screen bg-black py-20 relative overflow-hidden">
-      {/* Animated background particles */}
+      {/* Reduced animated background particles for better performance */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(50)].map((_, i) => (
+        {[...Array(15)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-white rounded-full opacity-20"
@@ -16,16 +16,14 @@ export function AboutSection() {
               top: `${Math.random() * 100}%`,
             }}
             animate={{
-              scale: [1, 3, 1],
-              opacity: [0.2, 0.8, 0.2],
-              x: [0, Math.random() * 100 - 50],
-              y: [0, Math.random() * 100 - 50],
+              scale: [1, 2, 1],
+              opacity: [0.2, 0.6, 0.2],
             }}
             transition={{
-              duration: Math.random() * 6 + 3,
+              duration: Math.random() * 3 + 2,
               repeat: Infinity,
               ease: "easeInOut",
-              delay: Math.random() * 3,
+              delay: Math.random() * 1,
             }}
           />
         ))}
@@ -37,9 +35,9 @@ export function AboutSection() {
           {/* Left side - Polaroid photos */}
           <motion.div 
             className="relative"
-            initial={{ x: -300, opacity: 0, rotateY: -90 }}
-            animate={{ x: 0, opacity: 1, rotateY: 0 }}
-            transition={{ duration: 1.5, ease: "backOut" }}
+            initial={{ x: -100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.8 }}
           >
             {/* Main polaroid */}
             <motion.div 
@@ -47,23 +45,18 @@ export function AboutSection() {
               whileHover={{ 
                 rotate: 0, 
                 scale: 1.05,
-                z: 100,
-                boxShadow: "0 30px 60px rgba(0,0,0,0.8)"
+                boxShadow: "0 20px 40px rgba(0,0,0,0.6)"
               }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
+              transition={{ duration: 0.3 }}
               animate={{
-                y: [0, -10, 0],
-                rotate: [3, 1, 3]
-              }}
-              style={{ 
-                transformStyle: "preserve-3d" 
+                y: [0, -5, 0],
               }}
             >
               <motion.div 
-                className="bg-white p-4 shadow-2xl"
+                className="bg-white p-4 shadow-xl"
                 whileHover={{
-                  rotateX: 10,
-                  rotateY: 5
+                  rotateX: 5,
+                  rotateY: 3
                 }}
               >
                 <ImageWithFallback
@@ -78,34 +71,28 @@ export function AboutSection() {
               {/* Tape effect */}
               <motion.div 
                 className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-16 h-8 bg-gray-600 opacity-80 rotate-12"
-                animate={{ rotate: [12, 8, 12] }}
-                transition={{ duration: 4, repeat: Infinity }}
+                animate={{ rotate: [12, 10, 12] }}
+                transition={{ duration: 3, repeat: Infinity }}
               />
             </motion.div>
 
             {/* Secondary polaroid */}
             <motion.div 
               className="absolute -bottom-8 -right-8 w-64 transform -rotate-12"
-              initial={{ scale: 0, rotate: -180 }}
-              transition={{ delay: 0.8, duration: 1.2, ease: "backOut" }}
+              initial={{ scale: 0 }}
+              animate={{ scale: 1, rotate: [-12, -10, -12] }}
+              transition={{ delay: 0.3, duration: 0.6 }}
               whileHover={{ 
                 rotate: 0, 
                 scale: 1.1,
-                z: 50,
-                boxShadow: "0 20px 40px rgba(0,0,0,0.6)"
-              }}
-              animate={{
-                scale: 1,
-                rotate: [-12, -8, -12],
-                x: [0, 5, 0],
-                y: [0, -5, 0]
+                boxShadow: "0 15px 30px rgba(0,0,0,0.5)"
               }}
             >
               <motion.div 
-                className="bg-white p-3 shadow-xl"
+                className="bg-white p-3 shadow-lg"
                 whileHover={{
-                  rotateX: -10,
-                  rotateY: -5
+                  rotateX: -5,
+                  rotateY: -3
                 }}
               >
                 <ImageWithFallback
@@ -119,26 +106,26 @@ export function AboutSection() {
               </motion.div>
               <motion.div 
                 className="absolute -top-1 right-4 w-12 h-6 bg-gray-600 opacity-80 rotate-45"
-                animate={{ rotate: [45, 40, 45] }}
-                transition={{ duration: 3, repeat: Infinity }}
+                animate={{ rotate: [45, 42, 45] }}
+                transition={{ duration: 2, repeat: Infinity }}
               />
             </motion.div>
 
             {/* Graffiti-style text overlay */}
             <motion.div 
               className="absolute top-8 -left-8 transform -rotate-12"
-              initial={{ x: -200, opacity: 0, scale: 0.5 }}
-              animate={{ x: 0, opacity: 1, scale: 1 }}
-              transition={{ delay: 1.2, duration: 1.5, ease: "backOut" }}
+              initial={{ x: -100, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ delay: 0.5, duration: 0.8 }}
               whileHover={{ scale: 1.1, rotate: -8 }}
             >
               <motion.h2 
-                className="text-6xl font-bold text-gray-300 stroke-text"
+                className="text-4xl font-bold text-gray-300"
                 animate={{
                   textShadow: [
-                    "0 0 20px rgba(255, 255, 255, 0.6)",
-                    "0 0 40px rgba(255, 255, 255, 0.9)",
-                    "0 0 20px rgba(255, 255, 255, 0.6)"
+                    "0 0 10px rgba(255, 255, 255, 0.6)",
+                    "0 0 20px rgba(255, 255, 255, 0.9)",
+                    "0 0 10px rgba(255, 255, 255, 0.6)"
                   ]
                 }}
                 transition={{ duration: 2, repeat: Infinity }}
@@ -146,10 +133,10 @@ export function AboutSection() {
                 MAC
               </motion.h2>
               <motion.p 
-                className="text-2xl text-gray-400 mt-2"
-                initial={{ opacity: 0, y: 20 }}
+                className="text-xl text-gray-400 mt-2"
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.8, duration: 0.8 }}
+                transition={{ delay: 0.7, duration: 0.5 }}
               >
                 MANCHESTER'S<br/>
                 CREATIVE VISION
@@ -160,35 +147,27 @@ export function AboutSection() {
           {/* Right side - About text */}
           <motion.div 
             className="space-y-8"
-            initial={{ x: 300, opacity: 0, rotateY: 90 }}
-            animate={{ x: 0, opacity: 1, rotateY: 0 }}
-            transition={{ delay: 0.5, duration: 1.5, ease: "backOut" }}
+            initial={{ x: 100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
           >
             <motion.div 
-              className="bg-gray-800 p-8 transform rotate-1 border border-gray-600"
+              className="bg-gray-800 p-8 border border-gray-600"
               whileHover={{ 
-                rotate: 0, 
                 scale: 1.02,
-                boxShadow: "0 25px 50px rgba(0,0,0,0.5)",
+                boxShadow: "0 20px 40px rgba(0,0,0,0.4)",
                 borderColor: "#ffffff"
               }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              animate={{
-                boxShadow: [
-                  "0 10px 30px rgba(255, 255, 255, 0.1)",
-                  "0 15px 40px rgba(255, 255, 255, 0.2)",
-                  "0 10px 30px rgba(255, 255, 255, 0.1)"
-                ]
-              }}
+              transition={{ duration: 0.3 }}
             >
               <motion.h3 
                 className="text-3xl font-bold text-white mb-6"
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
-                transition={{ delay: 1, duration: 0.8, ease: "backOut" }}
+                transition={{ delay: 0.5, duration: 0.5 }}
                 whileHover={{ 
                   scale: 1.1,
-                  textShadow: "0 0 20px rgba(255, 255, 255, 0.8)"
+                  textShadow: "0 0 15px rgba(255, 255, 255, 0.8)"
                 }}
               >
                 MALCOLM (MAC)
@@ -197,33 +176,33 @@ export function AboutSection() {
                 className="space-y-4 text-gray-200"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 1.3, duration: 1 }}
+                transition={{ delay: 0.7, duration: 0.5 }}
               >
                 <motion.p
-                  initial={{ x: -50, opacity: 0 }}
+                  initial={{ x: -30, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: 1.5, duration: 0.8 }}
-                  whileHover={{ x: 10, scale: 1.02 }}
+                  transition={{ delay: 0.8, duration: 0.5 }}
+                  whileHover={{ x: 5 }}
                 >
                   I'm Malcolm, a Manchester-based<br/>
                   multidisciplinary videographer with 1.5 years<br/>
                   of experience in fashion and videography.
                 </motion.p>
                 <motion.p
-                  initial={{ x: -50, opacity: 0 }}
+                  initial={{ x: -30, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: 1.7, duration: 0.8 }}
-                  whileHover={{ x: 10, scale: 1.02 }}
+                  transition={{ delay: 0.9, duration: 0.5 }}
+                  whileHover={{ x: 5 }}
                 >
                   My work spans cinematography, filmmaking, digital<br/>
                   storytelling, and fashion content creation.<br/>
                   Ready to travel anywhere for the perfect shot.
                 </motion.p>
                 <motion.p
-                  initial={{ x: -50, opacity: 0 }}
+                  initial={{ x: -30, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: 1.9, duration: 0.8 }}
-                  whileHover={{ x: 10, scale: 1.02 }}
+                  transition={{ delay: 1.0, duration: 0.5 }}
+                  whileHover={{ x: 5 }}
                 >
                   My portfolio reflects a diverse set of skills<br/>
                   rooted in culture, authenticity, and innovation.<br/>
@@ -232,12 +211,11 @@ export function AboutSection() {
                   ideas to life with cinematic excellence.
                 </motion.p>
                 <motion.p
-                  initial={{ x: -50, opacity: 0 }}
+                  initial={{ x: -30, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: 2.1, duration: 0.8 }}
+                  transition={{ delay: 1.1, duration: 0.5 }}
                   whileHover={{ 
-                    x: 10, 
-                    scale: 1.02,
+                    x: 5, 
                     color: "#FFFFFF"
                   }}
                   className="font-medium"

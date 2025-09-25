@@ -5,23 +5,49 @@ const ERROR_IMG_SRC =
 
 export function ImageWithFallback(props: React.ImgHTMLAttributes<HTMLImageElement>) {
   const [didError, setDidError] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   const handleError = () => {
     setDidError(true)
+    setIsLoading(false)
+  }
+
+  const handleLoad = () => {
+    setIsLoading(false)
   }
 
   const { src, alt, style, className, ...rest } = props
 
-  return didError ? (
-    <div
-      className={`inline-block bg-gray-100 text-center align-middle ${className ?? ''}`}
-      style={style}
-    >
-      <div className="flex items-center justify-center w-full h-full">
-        <img src={ERROR_IMG_SRC} alt="Error loading image" {...rest} data-original-url={src} />
+  // Show fallback if there was an error or if loading took too long
+  if (didError) {
+    return (
+      <div
+        className={`inline-block bg-gray-100 text-center align-middle flex items-center justify-center ${className ?? ''}`}
+        style={style}
+      >
+        <div className="flex flex-col items-center justify-center w-full h-full p-4">
+          <img src={ERROR_IMG_SRC} alt="Error loading image" {...rest} data-original-url={src} className="w-12 h-12" />
+          <span className="text-xs text-gray-500 mt-2">Failed to load image</span>
+        </div>
       </div>
+    )
+  }
+
+  return (
+    <div className={`relative ${className ?? ''}`} style={style}>
+      {isLoading && (
+        <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center">
+          <div className="w-8 h-8 border-4 border-gray-300 border-t-gray-600 rounded-full animate-spin"></div>
+        </div>
+      )}
+      <img 
+        src={src} 
+        alt={alt} 
+        className={`${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
+        {...rest} 
+        onError={handleError} 
+        onLoad={handleLoad}
+      />
     </div>
-  ) : (
-    <img src={src} alt={alt} className={className} style={style} {...rest} onError={handleError} />
   )
 }

@@ -13,8 +13,11 @@ export default function App() {
   return (
     <Router>
       <div className="min-h-screen bg-black overflow-x-hidden flex flex-col w-full">
+        <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:p-4 focus:bg-black focus:text-white">
+          Skip to main content
+        </a>
         <Header />
-        <main className="flex-grow pt-20 w-full">
+        <main id="main-content" className="flex-grow pt-20 w-full" tabIndex={-1}>
           <AnimatePresence mode="wait">
             <Routes>
               <Route path="/" element={<HomePage />} />
