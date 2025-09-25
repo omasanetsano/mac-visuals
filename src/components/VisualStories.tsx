@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { motion } from 'motion/react';
 
 // Import videos from assets folder
-import mac1 from "../assets/mac1 (1).mov";
-import mac2 from "../assets/mac1 (2).mov";
-import mac3 from "../assets/mac1 (3).mov";
-import mac4 from "../assets/mac1 (4).mov";
-import mac5 from "../assets/mac1 (5).MOV";
-import mac6 from "../assets/mac1 (6).MOV";
-import mac7 from "../assets/mac1 (7).mov";
+import mac1 from "../assets/mac1 (1).mp4";
+import mac2 from "../assets/mac1 (2).mp4";
+import mac3 from "../assets/mac1 (3).mp4";
+import mac4 from "../assets/mac1 (4).mp4";
+import mac5 from "../assets/mac1 (5).mp4";
+import mac6 from "../assets/mac1 (6).mp4";
+import mac7 from "../assets/mac1 (7).mp4";
 
 const VisualStories = () => {
   const videos = [mac1, mac2, mac3, mac4, mac5, mac6, mac7];

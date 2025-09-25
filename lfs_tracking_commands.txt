@@ -1,0 +1,19 @@
+# Git LFS Tracking Commands
+
+# 1. Remove .mov files from LFS tracking
+git lfs untrack "*.mov"
+git lfs untrack "*.MOV"
+
+# 2. Add .mp4 files to LFS tracking
+git lfs track "*.mp4"
+git lfs track "*.MP4"
+
+# 3. Update .gitattributes file (if not automatically updated)
+echo "*.mp4 filter=lfs diff=lfs merge=lfs -text" >> .gitattributes
+echo "*.MP4 filter=lfs diff=lfs merge=lfs -text" >> .gitattributes
+
+# 4. Verify LFS tracking
+git lfs track
+
+# 5. Check which files are tracked by LFS
+git lfs ls-files
