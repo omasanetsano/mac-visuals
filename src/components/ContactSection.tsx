@@ -4,21 +4,21 @@ import { motion } from 'motion/react';
 export function ContactSection() {
   const contactItems = [
     { icon: Mail, text: "omadheborzino@gmail.com", href: "mailto:omadheborzino@gmail.com" },
-    { icon: Phone, text: "+44 7123 456789", href: "tel:+447123456789" },
+    { icon: Phone, text: "+447443978978", href: "tel:+447443978978" },
     { icon: MapPin, text: "Manchester, United Kingdom", href: null }
   ];
 
   const socialLinks = [
     { 
       icon: Instagram, 
-      handle: "@mac_is_dope", 
-      url: "https://www.instagram.com/mac_is_dope/",
+      handle: "@mac_visualsedits", 
+      url: "https://www.instagram.com/mac_visualsedits?igsh=Zm1iZnFuMWV2eGdu",
       color: "text-pink-400"
     },
     { 
       icon: null,
-      handle: "@mac_is_dope", 
-      url: "https://www.tiktok.com/@mac_is_dope?_t=ZS-8zwylXh1S1Q&_r=1",
+      handle: "@mac_visuals_", 
+      url: "https://www.tiktok.com/@mac_visuals_?_t=ZS-901lDKYIRJh&_r=1",
       color: "text-purple-400",
       customIcon: true
     }
