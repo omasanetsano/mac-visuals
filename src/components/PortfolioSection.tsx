@@ -1,34 +1,73 @@
-import image_c2b893049bd9edd7b3e55b9c49368f098700d682 from 'figma:asset/c2b893049bd9edd7b3e55b9c49368f098700d682.png';
-import fashion from 'figma:asset/fashion.jpg';
-import image_7307ff073879b7e11e74dbb7adae056b6f60a7be from 'figma:asset/7307ff073879b7e11e74dbb7adae056b6f60a7be.png';
-import image_d13d14c728c7291adb45063b7fbcbfc655c566ac from 'figma:asset/d13d14c728c7291adb45063b7fbcbfc655c566ac.png';
-import image_c0b905c0305a1e9d34d45b66632685257571ac6e from 'figma:asset/c0b905c0305a1e9d34d45b66632685257571ac6e.png';
-import image_cd3344623dccdc88b220146f09250a5a36381148 from 'figma:asset/cd3344623dccdc88b220146f09250a5a36381148.png';
+import React, { useState, useEffect } from 'react';
+import pictures1 from '../assets/pictures1.jpg';
+import pictures2 from '../assets/pictures2.jpg';
+import pictures3 from '../assets/pictures3.jpg';
+import pictures4 from '../assets/pictures4.jpg';
+import pictures5 from '../assets/pictures5.jpg';
+import pictures6 from '../assets/pictures6.jpg';
 import { ImageWithFallback } from './figma/ImageWithFallback';
-import { Play, ExternalLink } from 'lucide-react';
-import { motion } from 'motion/react';
+import { Play, ExternalLink, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+
+// Type definitions for the images
+interface Project {
+  image: string;
+}
 
 export function PortfolioSection() {
-  const projects = [
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const projects: Project[] = [
     {
-      image: image_cd3344623dccdc88b220146f09250a5a36381148
+      image: pictures1
     },
     {
-      image: image_c0b905c0305a1e9d34d45b66632685257571ac6e
+      image: pictures2
     },
     {
-      image: image_d13d14c728c7291adb45063b7fbcbfc655c566ac
+      image: pictures3
     },
     {
-      image: image_7307ff073879b7e11e74dbb7adae056b6f60a7be
+      image: pictures4
     },
     {
-      image: fashion
+      image: pictures5
     },
     {
-      image: image_c2b893049bd9edd7b3e55b9c49368f098700d682
+      image: pictures6
     }
   ];
+
+  const openModal = (image: string) => {
+    setIsLoading(true);
+    setSelectedImage(image);
+    // Hide body scroll when modal is open
+    document.body.style.overflow = 'hidden';
+    // Simulate loading time for better UX
+    setTimeout(() => setIsLoading(false), 300);
+  };
+
+  const closeModal = () => {
+    setSelectedImage(null);
+    // Restore body scroll when modal is closed
+    document.body.style.overflow = 'unset';
+  };
+
+  // Handle ESC key to close modal
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'Escape' && selectedImage) {
+      closeModal();
+    }
+  };
+
+  // Add event listener for ESC key
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown as EventListener);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown as EventListener);
+    };
+  }, [selectedImage]);
 
   return (
     <section id="portfolio" className="min-h-screen bg-gradient-to-br from-gray-900 to-black py-20 relative overflow-hidden">
@@ -78,9 +117,18 @@ export function PortfolioSection() {
             textShadow: "0 0 30px rgba(255, 255, 255, 0.8)"
           }}
         >
-          <span>Portraits</span>
+          <span>Me As A Fashion Model</span>
           <span className="ml-4 text-5xl">📷</span>
         </motion.h2>
+        
+        <motion.p 
+          className="text-xl text-gray-300 text-center max-w-3xl mx-auto mb-16 px-4"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 1 }}
+        >
+          Fashion and art are more than just interests for me, they are a way of life. I embrace both the challenges and the joys that come with them because my love for fashion runs as deep as my love for videography. Expressing myself authentically through these mediums is something I cherish, and I want others to see, feel, and connect with that part of me.
+        </motion.p>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {projects.map((project, index) => (
@@ -111,7 +159,12 @@ export function PortfolioSection() {
                 z: 100,
                 transition: { duration: 0.6 }
               }}
+              whileTap={{ 
+                scale: 0.95,
+                rotate: 0
+              }}
               style={{ perspective: 1000 }}
+              onClick={() => openModal(project.image)}
             >
               {/* Polaroid container */}
               <motion.div 
@@ -121,6 +174,10 @@ export function PortfolioSection() {
                 whileHover={{ 
                   rotate: 0,
                   boxShadow: "0 40px 80px rgba(0,0,0,0.8)"
+                }}
+                whileTap={{ 
+                  scale: 0.95,
+                  rotate: 0
                 }}
                 animate={{
                   rotate: index % 2 === 0 ? [2, 4, 2] : [-2, -4, -2],
@@ -134,6 +191,7 @@ export function PortfolioSection() {
                 <div className="relative overflow-hidden">
                   <motion.div
                     whileHover={{ scale: 1.2, rotate: 2 }}
+                    whileTap={{ scale: 1.1 }}
                     transition={{ duration: 0.8 }}
                   >
                     <ImageWithFallback
@@ -145,7 +203,7 @@ export function PortfolioSection() {
                   
                   {/* Insane overlay with particles */}
                   <motion.div 
-                    className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center"
+                    className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-opacity duration-500 flex items-center justify-center"
                     initial={false}
                     whileHover={{
                       background: [
@@ -160,6 +218,7 @@ export function PortfolioSection() {
                       <motion.div
                         initial={{ scale: 0, rotate: 180 }}
                         whileHover={{ scale: 1, rotate: 0 }}
+                        whileTap={{ scale: 0.9 }}
                         transition={{ duration: 0.6, ease: "backOut" }}
                       >
                         <Play size={48} className="mx-auto mb-2" />
@@ -204,6 +263,81 @@ export function PortfolioSection() {
           ))}
         </div>
 
+        {/* Modal for full-size image viewing */}
+        <AnimatePresence>
+          {selectedImage && (
+            <motion.div
+              className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 backdrop-blur-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              onClick={closeModal}
+            >
+              <motion.div
+                className="relative max-w-[60vw] max-h-[60vh]"
+                initial={{ scale: 0.8, opacity: 0, y: 20 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                exit={{ scale: 0.8, opacity: 0, y: 20 }}
+                transition={{ 
+                  type: "spring", 
+                  stiffness: 300, 
+                  damping: 30,
+                  duration: 0.4 
+                }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <motion.button
+                  className="absolute top-2 right-2 sm:top-4 sm:right-4 text-white bg-black/50 rounded-full p-2 sm:p-3 z-10 hover:bg-black transition-colors"
+                  onClick={closeModal}
+                  aria-label="Close image viewer"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <X size={20} className="sm:w-6 sm:h-6" />
+                </motion.button>
+                
+                {isLoading ? (
+                  <motion.div 
+                    className="flex items-center justify-center h-64"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                  >
+                    <motion.div 
+                      className="animate-spin rounded-full h-8 w-8 sm:h-12 sm:w-12 border-t-2 border-b-2 border-white"
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                    />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    transition={{ 
+                      type: "spring", 
+                      stiffness: 300, 
+                      damping: 25,
+                      duration: 0.4 
+                    }}
+                    className="flex items-center justify-center"
+                  >
+                    <img 
+                      src={selectedImage} 
+                      alt="Full size view" 
+                      className="max-w-full max-h-full object-contain mx-auto shadow-2xl rounded-lg"
+                    />
+                  </motion.div>
+                )}
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   );

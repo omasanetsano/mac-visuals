@@ -1,5 +1,6 @@
 import { Mail, Phone, Instagram, MapPin } from 'lucide-react';
 import { motion } from 'motion/react';
+import React from 'react';
 
 export function ContactSection() {
   const contactItems = [
@@ -211,9 +212,9 @@ export function ContactSection() {
                         >
                           <path d="M19.321 5.562a5.124 5.124 0 0 1-.443-.258 6.228 6.228 0 0 1-1.137-.966c-.849-.95-1.212-1.864-1.275-2.43C16.458 1.719 16.458 1.536 16.458 1.53V1.5c0-.041 0-.082-.01-.123h-3.933v13.891c0 .173 0 .343-.017.512a3.504 3.504 0 0 1-6.967-.552c0-1.944 1.567-3.511 3.511-3.511.173 0 .345.014.512.041V7.8c-.174-.024-.35-.037-.529-.037C4.568 7.763 1.5 10.832 1.5 14.79c0 3.958 3.068 7.027 7.025 7.027 3.958 0 7.025-3.068 7.025-7.027V9.313c1.378.979 3.037 1.551 4.825 1.551v-3.933c-.949 0-1.85-.265-2.619-.758-.374-.239-.725-.526-1.041-.858z"/>
                         </motion.svg>
-                      ) : (
-                        <social.icon size={32} />
-                      )}
+                      ) : social.icon ? (
+                        React.createElement(social.icon, { size: 32 })
+                      ) : null}
                     </motion.a>
                     <motion.span 
                       className="text-gray-400 text-lg"

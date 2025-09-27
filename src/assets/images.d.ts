@@ -8,6 +8,7 @@ declare module '*.jpg' {
   export default imageJpgValue;
 }
 
+
 declare module '*.jpeg' {
   const imageJpegValue: string;
   export default imageJpegValue;
@@ -22,3 +23,6 @@ declare module '*.svg' {
   const imageSvgValue: string;
   export default imageSvgValue;
 }
+
+// Make sure we export something to ensure this file is treated as a module
+export {};

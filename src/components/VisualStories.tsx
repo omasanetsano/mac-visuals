@@ -8,6 +8,9 @@ import mac4 from "../assets/mac1 (4).mp4";
 import mac5 from "../assets/mac1 (5).mp4";
 import mac6 from "../assets/mac1 (6).mp4";
 import mac7 from "../assets/mac1 (7).mp4";
+import { Play } from 'lucide-react';
+// @ts-ignore
+import VideoLightbox from './VideoLightbox.jsx';
 
 // Simplified version without motion animations for better performance
 const VisualStories = () => {
@@ -15,7 +18,8 @@ const VisualStories = () => {
   const [displayText, setDisplayText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
-  const videoRefs = useRef([] as HTMLVideoElement[]);
+  const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+  const videoRefs = useRef<HTMLVideoElement[]>([]);
   const fullText = "MAC'S VISUAL STORIES";
 
   useEffect(() => {
@@ -46,39 +50,81 @@ const VisualStories = () => {
     return () => clearTimeout(timeout);
   }, [currentIndex, fullText, isDeleting]);
 
-  // Optimize video loading
+  // Handle video previews
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const video = entry.target as HTMLVideoElement;
-          if (entry.isIntersecting) {
-            // Start loading when video is in viewport
-            video.play().catch(e => console.log("Autoplay prevented:", e));
-          } else {
-            // Pause when video is out of viewport
-            video.pause();
-          }
+    const videoElements = videoRefs.current;
+    
+    const handleVideoPreview = (video: HTMLVideoElement) => {
+      if (!video) return;
+      
+      // Play the video muted
+      video.muted = true;
+      video.loop = true;
+      
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          console.log("Autoplay preview prevented:", error);
         });
-      },
-      { threshold: 0.3 } // Trigger when 30% of video is visible
-    );
-
-    // Initialize the ref array with the correct length
-    if (videoRefs.current.length !== videos.length) {
-      videoRefs.current = Array(videos.length).fill(null);
-    }
-
-    videoRefs.current.forEach((video) => {
-      if (video) observer.observe(video);
-    });
-
-    return () => {
-      videoRefs.current.forEach((video) => {
-        if (video) observer.unobserve(video);
-      });
+      }
+      
+      // Pause after 5 seconds
+      const timeout = setTimeout(() => {
+        if (video && !video.paused) {
+          video.pause();
+          // Reset to beginning for next play
+          video.currentTime = 0;
+        }
+      }, 5000);
+      
+      return () => clearTimeout(timeout);
     };
-  }, [videos.length]);
+    
+    // Apply to all videos
+    videoElements.forEach((video, index) => {
+      if (video) {
+        // Play immediately
+        handleVideoPreview(video);
+        
+        // Set up interval to restart preview every 5 seconds
+        const interval = setInterval(() => {
+          if (video) {
+            video.currentTime = 0;
+            handleVideoPreview(video);
+          }
+        }, 5000);
+        
+        return () => clearInterval(interval);
+      }
+    });
+  }, []);
+
+  const openVideoModal = (video: string) => {
+    setSelectedVideo(video);
+    // Hide body scroll when modal is open
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeVideoModal = () => {
+    setSelectedVideo(null);
+    // Restore body scroll when modal is closed
+    document.body.style.overflow = 'unset';
+  };
+
+  // Handle ESC key to close modal
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'Escape' && selectedVideo) {
+      closeVideoModal();
+    }
+  };
+
+  // Add event listener for ESC key
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [selectedVideo]);
 
   return (
     // Removed motion animations and background elements for better performance
@@ -95,38 +141,44 @@ const VisualStories = () => {
           {videos.map((videoSrc, index) => (
             <div
               key={index}
-              className="relative group"
+              className="relative group cursor-pointer"
+              onClick={() => openVideoModal(videoSrc)}
             >
               <div className="relative overflow-hidden rounded-2xl">
                 <video
                   ref={(el) => {
-                    if (el) videoRefs.current[index] = el;
+                    if (el) videoRefs.current[index] = el as HTMLVideoElement;
                   }}
                   src={videoSrc}
-                  autoPlay={false} // Don't autoplay immediately
-                  loop
                   muted
                   playsInline
-                  preload="metadata" // Only load metadata initially
+                  preload="metadata"
                   controls={false}
                   className="w-full h-auto object-cover"
                   style={{ 
                     maxWidth: '100%', 
                     height: 'auto'
                   }}
-                  onLoadedData={(e) => {
-                    // Ensure optimal playback
-                    const video = e.target as HTMLVideoElement;
-                    video.playbackRate = 1.0;
-                  }}
                 />
-                {/* Simplified overlay effect */}
-                <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 pointer-events-none rounded-2xl transition-opacity duration-300"></div>
+                
+                {/* Play button overlay */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="bg-black/50 rounded-full p-4">
+                    <Play size={32} className="text-white" />
+                  </div>
+                </div>
               </div>
             </div>
           ))}
         </div>
       </div>
+      
+      {/* Video Lightbox Modal */}
+      <VideoLightbox 
+        videoSrc={selectedVideo} 
+        isOpen={!!selectedVideo} 
+        onClose={closeVideoModal} 
+      />
     </section>
   );
 };

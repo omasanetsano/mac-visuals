@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
 export function Header() {
@@ -12,7 +11,7 @@ export function Header() {
     { path: "/about", label: "About Me" },
     { path: "/experience", label: "Experience" },
     { path: "/content", label: "Visual Stories" },
-    { path: "/portfolio", label: "Portraits" },
+    { path: "/portfolio", label: "Fashion Modelling" },
     { path: "/contact", label: "Contact" },
   ];
 
@@ -68,14 +67,25 @@ export function Header() {
             ))}
           </div>
 
-          {/* Hamburger */}
-          <button
-            className="md:hidden text-white p-1"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle menu"
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Animated Hamburger */}
+          <div className="md:hidden">
+            <input 
+              type="checkbox" 
+              id="menu" 
+              className="hidden" 
+              checked={isOpen}
+              onChange={() => setIsOpen(!isOpen)}
+            />
+            <label 
+              htmlFor="menu" 
+              className="relative flex flex-col justify-center items-center h-12 w-16 cursor-pointer group"
+              aria-label="Toggle menu"
+            >
+              <div className="menu-bar top-bar"></div>
+              <div className="menu-bar middle-bar"></div>
+              <div className="menu-bar bottom-bar"></div>
+            </label>
+          </div>
         </div>
 
         {/* Mobile Menu Overlay */}
@@ -115,6 +125,39 @@ export function Header() {
           )}
         </AnimatePresence>
       </div>
+      
+      <style>
+        {`
+        .menu-bar {
+          position: relative;
+          width: 35px;
+          height: 3px;
+          background: #ffffff;
+          margin: 6px 0;
+          transition: 0.3s;
+          transition-delay: 0.1s;
+        }
+        
+        #menu:checked ~ label .top-bar {
+          transform: translateY(12px) rotate(45deg);
+        }
+        
+        #menu:checked ~ label .middle-bar {
+          opacity: 0;
+          transform: translateX(-10px);
+        }
+        
+        #menu:checked ~ label .bottom-bar {
+          transform: translateY(-12px) rotate(-45deg);
+        }
+        
+        label:hover .top-bar,
+        label:hover .middle-bar,
+        label:hover .bottom-bar {
+          background: #cccccc;
+        }
+        `}
+      </style>
     </header>
   );
 }

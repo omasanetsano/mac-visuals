@@ -4,21 +4,17 @@ import { isHighPerformanceDevice } from '../utils/performanceUtils';
 
 export function ExperienceSection() {
   const technicalSkills = [
-    { name: "Premiere Pro", level: 95, color: "bg-white" },
-    { name: "After Effects", level: 90, color: "bg-white" },
-    { name: "Lightroom", level: 92, color: "bg-white" },
-    { name: "Photoshop", level: 88, color: "bg-white" },
-    { name: "Final Cut Pro", level: 94, color: "bg-white" },
-    { name: "DaVinci Resolve", level: 85, color: "bg-white" }
+    { name: "CapCut Pro", level: 100, color: "bg-white" },
+    { name: "DaVinci Resolve", level: 25, color: "bg-white" }
   ];
 
   const personalSkills = [
     { name: "Creativity", level: 98, color: "bg-white" },
-    { name: "Attention to Detail", level: 95, color: "bg-white" },
-    { name: "Storytelling", level: 92, color: "bg-white" },
-    { name: "Collaboration", level: 90, color: "bg-white" },
+    { name: "Attention to Detail", level: 100, color: "bg-white" },
+    { name: "Storytelling", level: 90, color: "bg-white" },
+    { name: "Collaboration", level: 100, color: "bg-white" },
     { name: "Adaptability", level: 88, color: "bg-white" },
-    { name: "Time Management", level: 85, color: "bg-white" }
+    { name: "Time Management", level: 100, color: "bg-white" }
   ];
 
   const experiences = [
@@ -29,10 +25,16 @@ export function ExperienceSection() {
       description: "Providing high-quality videography services for independent creators. I made videos for creators at creative meets and have made music videos."
     },
     {
-      company: "UNDERGROUND MCR",
-      period: "NOV 2023 - FEB 2024",
+      company: "UNDERGROUND MCR (Fashion)",
+      period: "NOVEMBER 2024 - PRESENT",
       role: "Content Creator",
-      description: "Created multimedia content for Manchester's underground music scene"
+      description: "Created multimedia content for Manchester's underground creative scenes"
+    },
+    {
+      company: "HEADS CREATIVE EVENT",
+      period: "NOV 2024 - PRESENT",
+      role: "",
+      description: ""
     }
   ];
 
