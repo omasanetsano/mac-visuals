@@ -8,7 +8,6 @@ declare module '*.jpg' {
   export default imageJpgValue;
 }
 
-
 declare module '*.jpeg' {
   const imageJpegValue: string;
   export default imageJpegValue;

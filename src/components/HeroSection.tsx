@@ -9,7 +9,7 @@ export function HeroSection() {
   const navLinks = [
     { to: '/about', label: 'About Me' },
     { to: '/experience', label: 'Experience' },
-    { to: '/portfolio', label: 'Portraits' },
+    { to: '/portfolio', label: 'Fashion Modelling' },
     { to: '/content', label: 'Visual Stories' }
   ];
 
@@ -232,7 +232,7 @@ export function HeroSection() {
                 >
                   <ImageWithFallback
                     src={image_5cd2c6568861113efef088165ee4352afe284d03}
-                    alt="Creative professional portrait"
+                    alt="Creative professional fashion modelling"
                     className="w-full h-full object-cover"
                   />
                 </motion.div>
